@@ -70,7 +70,7 @@ jobs:
 
     - name: Run Ansible playbook with Inventory
       run: |
-        ansible-playbook -i ./devops_assignment/hosts.ini ./devops_assignment/ansible_playbook.yaml
+        ansible-playbook -i ./devops_assignment/tkxel_devops/hosts.ini ./devops_assignment/tkxel_devops/ansible_playbook.yaml
       env:
         PEM_FILE_CONTENTS: ./devops_assignment.pem
         ANSIBLE_HOST_KEY_CHECKING: False
