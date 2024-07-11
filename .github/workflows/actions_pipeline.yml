@@ -65,7 +65,7 @@ jobs:
 
     - name: Create PEM file from secret
       run: |
-        echo "${{ secrets.PEM_FILE_CONTENTS }}" > devops_assignment.pem
+        echo "${{ secrets.PEM_FILE_CONTENTS }}" > ./devops_assignment.pem
         chmod 400 devops_assignment.pem
 
     - name: Run Ansible playbook with Inventory
