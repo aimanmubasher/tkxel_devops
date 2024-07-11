@@ -70,6 +70,7 @@ jobs:
 
     - name: Run Ansible playbook with Inventory
       run: |
+        ls
         ansible-playbook -i ./.github/workflows/hosts.ini ./.github/workflows/ansible_playbook.yaml
       env:
         PEM_FILE_CONTENTS: ./devops_assignment.pem
