@@ -65,7 +65,7 @@ jobs:
 
     - name: Create PEM file from secret
       run: |
-        echo "${{ secrets.PEM_FILE_CONTENTS }}" > ./devops_assignment.pem
+        echo "${{ secrets.PEM_FILE_CONTENTS }}" > ./.github/workflows/devops_assignment.pem
         chmod 400 devops_assignment.pem
 
     - name: Run Ansible playbook with Inventory
@@ -73,7 +73,7 @@ jobs:
         ls
         ansible-playbook -i ./.github/workflows/hosts.ini ./.github/workflows/ansible_playbook.yaml
       env:
-        PEM_FILE_CONTENTS: ./devops_assignment.pem
+        PEM_FILE_CONTENTS: ./.github/workflows/devops_assignment.pem
         ANSIBLE_HOST_KEY_CHECKING: False
     
     # - name: Cleanup
