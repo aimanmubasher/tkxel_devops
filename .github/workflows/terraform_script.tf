@@ -100,7 +100,7 @@ resource "aws_instance" "web_instance" {
     
     associate_public_ip_address = true
     
-    key_name = "devops_keypair2"
+    key_name = "devops-kp"
 
     tags = {
         Name = "EC2-instance"}
