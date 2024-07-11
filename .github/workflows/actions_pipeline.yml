@@ -69,11 +69,11 @@ jobs:
         chmod 400 devops_assignment.pem
 
     - name: Run Ansible playbook with Inventory
-        run: |
-              ansible-playbook -i ./hosts.ini ./ansible_playbook.yaml
-        env:
-              ANSIBLE_PRIVATE_KEY_FILE: ./devops_assignment.pem
-              ANSIBLE_HOST_KEY_CHECKING: False
+      run: |
+        ansible-playbook -i ./devops_assignment/hosts.ini ./devops_assignment/ansible_playbook.yaml
+      env:
+        PEM_FILE_CONTENTS: ./devops_assignment.pem
+        ANSIBLE_HOST_KEY_CHECKING: False
     
     # - name: Cleanup
     #   run: terraform destroy --auto-approve
