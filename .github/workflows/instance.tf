@@ -28,6 +28,7 @@ resource "aws_vpc" "devops_vpc" {
 resource "aws_subnet" "devops_public_subnet" {
     vpc_id = aws_vpc.devops_vpc.id
     cidr_block = "20.0.0.0/16"
+    availability_zone = "us-east-1e"
     
     tags = {
         Name = "DEVOPS_subnet"
