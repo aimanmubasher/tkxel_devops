@@ -22,9 +22,6 @@ jobs:
       uses: hashicorp/setup-terraform@v2
       with:
         terraform_version: 1.9.1
-
-    - name: Initialize Terraform
-      run: terraform init
     
     - name: Set AWS credentials
       run: |
@@ -46,9 +43,11 @@ jobs:
     
     - name: Validate Terraform
       run: terraform validate
+      working-directory: ./.github/workflows/
 
     - name: Initialize Terraform
       run: terraform init
+      working-directory: ./.github/workflows/
 
     - name: Terraform Plan
       run: terraform plan
