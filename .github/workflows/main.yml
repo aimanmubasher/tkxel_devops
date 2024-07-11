@@ -52,10 +52,12 @@ jobs:
 
     - name: Terraform Plan
       run: terraform plan
+      working-directory: ./.github/workflows/
 
     - name: Terraform Apply
       if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev') && (github.event_name == 'push'||github.event_name == 'pull')
       run: terraform apply --auto-approve
+      working-directory: ./.github/workflows/
 
     - name: CLeanup
       run: terraform destroy
