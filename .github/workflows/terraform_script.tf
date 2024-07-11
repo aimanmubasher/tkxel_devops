@@ -106,22 +106,22 @@ resource "aws_instance" "web_instance" {
         Name = "EC2-instance"}
 }
 
-resource "tls_private_key" "rsa_4096"{
-    algorithm = "RSA"
-    rsa_bits = 4096
-}
+# resource "tls_private_key" "rsa_4096"{
+#     algorithm = "RSA"
+#     rsa_bits = 4096
+# }
 
 
 resource "aws_key_pair" "key_pair" {
   key_name   = "devops_keypair" #var.key_name
-  public_key = tls_private_key.rsa_4096.public_key_openssh
+  public_key = file("~/.ssh/devops_keypair.pub")
 }
 
-resource "local_file" "private_key" {
-     content = tls_private_key.rsa_4096.private_key_pem
-     filename = "devops_keypair" #var.key_name
+# resource "local_file" "private_key" {
+#      content = tls_private_key.rsa_4096.private_key_pem
+#      filename = "devops_keypair" #var.key_name
   
-}
+# }
 variable "key_name" {
   description = "The name of the SSH key pair to use"
   type        = string
