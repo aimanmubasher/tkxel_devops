@@ -46,6 +46,11 @@ jobs:
         aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
         aws-region: us-east-1
     
+    - name: Create PEM file from secret
+      run: |
+        echo "${{ secrets.PEM_FILE_CONTENTS }}" > devops_assignment.pem
+        chmod 400 devops_assignment.pem
+
     - name: Initialize Terraform
       run: terraform init
       working-directory: ./.github/workflows/
