@@ -112,10 +112,10 @@ resource "aws_instance" "web_instance" {
 # }
 
 
-resource "aws_key_pair" "key_pair" {
-  key_name   = "devops_keypair" #var.key_name
-  public_key = file("~/.ssh/devops_keypair.pub")
-}
+#resource "aws_key_pair" "key_pair" {
+#  key_name   = "devops_keypair" #var.key_name
+#  public_key = file("~/.ssh/devops_keypair.pub")
+#}
 
 # resource "local_file" "private_key" {
 #      content = tls_private_key.rsa_4096.private_key_pem
