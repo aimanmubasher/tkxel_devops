@@ -121,8 +121,8 @@ resource "aws_instance" "web_instance" {
     
     associate_public_ip_address = true
     
-#    key_name = aws_key_pair.key_pair.key_name  
-    key_name = "devops_keypair2"
+    key_name = aws_key_pair.key_pair.key_name  
+    #key_name = "devops_keypair2"
     tags = {
         Name = "EC2-instance"}
 }
