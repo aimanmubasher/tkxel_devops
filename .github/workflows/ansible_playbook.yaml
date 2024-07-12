@@ -12,6 +12,10 @@
         dest: ./hosts.ini
       vars:
         web_instance_public_ip: "{{ terraform_output.stdout }}"
+    - name: Debug Terraform output
+      debug:
+        var: terraform_output.stdout
+
 
 - name: Configure EC2 instance with Docker and Docker Compose
   hosts: all
