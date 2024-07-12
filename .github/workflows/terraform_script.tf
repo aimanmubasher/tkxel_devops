@@ -70,27 +70,6 @@ resource "aws_security_group" "web_sg" {
         protocol    = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
-    #jenkins port
-    ingress {
-        from_port   = 8080
-        to_port     = 8080
-        protocol    = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-    #sonarqube port
-    ingress {
-        from_port   = 9000
-        to_port     = 9000
-        protocol    = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-    #posgress port -> used by sonarqube
-    ingress {
-        from_port   = 5000
-        to_port     = 5000
-        protocol    = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
 
     ingress {
         from_port   = 22
@@ -121,8 +100,8 @@ resource "aws_instance" "web_instance" {
     
     associate_public_ip_address = true
     
-    #key_name = aws_key_pair.key_pair.key_name  
-    #key_name = "devops_keypair2"
+    key_name = "devops-kp"
+
     tags = {
         Name = "EC2-instance"}
 }
