@@ -68,14 +68,12 @@ jobs:
         echo "${{ secrets.PEM_FILE_CONTENTS }}" > ./.github/workflows/devops_keypair.pem
         chmod 600 ./.github/workflows/devops_keypair.pem
 
-    - name: Run Ansible playbook with Inventory
-      run: |
-        ls
-        ansible-playbook -i ./.github/workflows/hosts.ini ./.github/workflows/ansible_playbook.yaml
+    - name: Run Ansible playbook to generate inventory
+      run: ansible-playbook ./.github/workflows/ansible_playbook.yaml --tags "generate_inventory"
       env:
-        PEM_FILE_CONTENTS: ./.github/workflows/devops_keypair.pem
         ANSIBLE_HOST_KEY_CHECKING: False
-    
-    # - name: Cleanup
-    #   run: terraform destroy --auto-approve
-    #   working-directory: ./.github/workflows/
+
+    - name: Run Ansible playbook with generated inventory
+      run: ansible-playbook -i ./.github/workflows/hosts.ini ./.github/workflows/ansible_playbook.yaml --tags "configure_ec2"
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: False
