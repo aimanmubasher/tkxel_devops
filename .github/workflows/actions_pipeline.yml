@@ -71,7 +71,7 @@ jobs:
     - name: Run Ansible playbook with Inventory
       run: |
         ls
-        ansible-playbook --private-key ./.github/workflows/devops_keypair.pem -i ./.github/workflows/hosts.ini ./.github/workflows/ansible_playbook.yaml
+        ansible-playbook -i ./.github/workflows/hosts.ini ./.github/workflows/ansible_playbook.yaml
       env:
         PEM_FILE_CONTENTS: ./.github/workflows/devops_keypair.pem
         ANSIBLE_HOST_KEY_CHECKING: False
