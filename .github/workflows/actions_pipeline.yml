@@ -76,6 +76,6 @@ jobs:
         PEM_FILE_CONTENTS: ./.github/workflows/devops_keypair.pem
         ANSIBLE_HOST_KEY_CHECKING: False
     
-    # - name: Cleanup
-    #   run: terraform destroy --auto-approve
-    #   working-directory: ./.github/workflows/
+    - name: Cleanup
+      run: terraform destroy --auto-approve
+      working-directory: ./.github/workflows/
