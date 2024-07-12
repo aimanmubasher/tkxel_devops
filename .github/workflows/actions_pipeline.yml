@@ -68,7 +68,7 @@ jobs:
         echo "${{ secrets.PEM_FILE_CONTENTS }}" > ./.github/workflows/devops_keypair.pem
         chmod 600 ./.github/workflows/devops_keypair.pem
         eval "$(ssh-agent -s)"
-        ssh-add ~/.ssh/devops_keypair
+        ssh-add ~/.github/workflows/devops_keypair
 
     - name: Run Ansible playbook with Inventory
       run: |
