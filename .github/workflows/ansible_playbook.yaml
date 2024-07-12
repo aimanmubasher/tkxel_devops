@@ -1,5 +1,19 @@
 ---
-- name: Configure EC2 instance with Docker, Docker Compose
+- name: Generate dynamic inventory file
+  hosts: localhost
+  tasks:
+    - name: Fetch the public IP from Terraform output
+      command: terraform output -raw web_instance_public_ip
+      register: terraform_output
+
+    - name: Create hosts.ini file from template
+      template:
+        src: ./hosts.ini.j2
+        dest: ./hosts.ini
+      vars:
+        web_instance_public_ip: "{{ terraform_output.stdout }}"
+
+- name: Configure EC2 instance with Docker and Docker Compose
   hosts: all
   become: yes
   tasks:
@@ -7,17 +21,12 @@
       apt:
         update_cache: yes
 
-#    - name: Install necessary packages including Docker, Docker Compose
-#      apt:
-#        name:
-#          - docker.io
-#          - docker-compose
-          # - python3
-          # - python3-pip
-#        state: present
-      # Add notify and handler for restarting Docker service if needed
-      # notify:
-      #   - Restart Docker service
+    - name: Install necessary packages including Docker and Docker Compose
+      apt:
+        name:
+          - docker.io
+          - docker-compose
+        state: present
 
     - name: Start Docker service
       systemd:
