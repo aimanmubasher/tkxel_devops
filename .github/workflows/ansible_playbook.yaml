@@ -1,6 +1,6 @@
 ---
 - name: Configure EC2 instance with Docker, Docker Compose, and Node.js
-  hosts: ec2_instances
+  hosts: all
   become: yes
   tasks:
     - name: Update apt cache
