@@ -70,6 +70,27 @@ resource "aws_security_group" "web_sg" {
         protocol    = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
+    #jenkins port
+    ingress {
+        from_port   = 8080
+        to_port     = 8080
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    #sonarqube port
+    ingress {
+        from_port   = 9000
+        to_port     = 9000
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    #posgress port -> used by sonarqube
+    ingress {
+        from_port   = 5000
+        to_port     = 5000
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
 
     ingress {
         from_port   = 22
@@ -86,9 +107,6 @@ resource "aws_security_group" "web_sg" {
     }
 }
 
-
-
-
 resource "aws_instance" "web_instance" {  
     instance_type = "t2.micro"
     availability_zone = "us-east-1e"
@@ -100,10 +118,16 @@ resource "aws_instance" "web_instance" {
     
     associate_public_ip_address = true
     
-    key_name = "devops-kp"
+    #key_name = aws_key_pair.key_pair.key_name  
 
     tags = {
         Name = "EC2-instance"}
+}
+
+#Output block to capture the public IP address of the EC2 instance dynamically
+output "web_instance_public_ip" {
+  description = "The public IP address of the web instance"
+  value       = aws_instance.web_instance.public_ip
 }
 
 # resource "tls_private_key" "rsa_4096"{
